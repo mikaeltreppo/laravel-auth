@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -14,7 +15,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $project = Project::all();
+        return view('admin.projects.index', compact('project'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -35,7 +37,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form_data = $request->all();
+    
+        $newProject = new Project();
+        $newProject->title = $form_data['title'];
+        $newProject->description = $form_data['description'];
+        $newProject->save();
+    
+        return redirect()->route('admin.projects.index');
     }
 
     /**
@@ -46,7 +55,8 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        return view('admin.project.show', compact('project'));
     }
 
     /**
@@ -80,6 +90,8 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project->delete();
+        return redirect()->route('admin.projects.index');
     }
 }
