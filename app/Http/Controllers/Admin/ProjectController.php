@@ -38,12 +38,12 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $form_data = $request->all();
-    
+
         $newProject = new Project();
         $newProject->title = $form_data['title'];
         $newProject->description = $form_data['description'];
         $newProject->save();
-    
+
         return redirect()->route('admin.projects.index');
     }
 
@@ -56,7 +56,7 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::findOrFail($id);
-        return view('admin.project.show', compact('project'));
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
