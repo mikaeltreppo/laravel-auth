@@ -21,7 +21,7 @@
         <td>{{$proj->description}}</td>
         <td> 
           <a href="{{route('admin.projects.show', ['project' => $proj->id])}}" class="btn btn-primary m-2">Apri</a> 
-          <a href="#" class="btn btn-warning m-2">Modifica</a> 
+          <a href="{{route('admin.projects.edit', ['project' => $proj->id])}}" class="btn btn-warning m-2">Modifica</a> 
           <button type="submit" class="btn btn-danger">Cancella</button>
               
               

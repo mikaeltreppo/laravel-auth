@@ -13,7 +13,7 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() //finita
     {
         $project = Project::all();
         return view('admin.projects.index', compact('project'));
@@ -24,7 +24,7 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() //finita
     {
         return view('admin.projects.create');
     }
@@ -35,7 +35,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) //finito
     {
         $form_data = $request->all();
 
@@ -53,7 +53,7 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) //finita
     {
         $project = Project::findOrFail($id);
         return view('admin.projects.show', compact('project'));
@@ -65,9 +65,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id)//finita
     {
-        //
+        $project = Project::findOrFail($id);
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -77,9 +78,14 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id)//finito
     {
-        //
+        $project = Project::findOrFail($id);
+        $form_data = $request->all();
+        $project->update($form_data);
+        
+        return redirect()->route('admin.projects.show', ['project'=> $project->id]);
+
     }
 
     /**
