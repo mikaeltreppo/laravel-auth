@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Type;
@@ -13,7 +14,7 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()//finita
+    public function index() //finita
     {
         $types = Type::all();
         return view('admin.types.index', compact('types'));
@@ -24,7 +25,7 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()//finita
+    public function create() //finita
     {
         return view('admin.types.create');
     }
@@ -35,13 +36,13 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)//finita
+    public function store(Request $request) //finita
     {
         $form_data = $request->all();
 
         $newType = new Type();
-        $newType->title=$form_data['title'];
-        $newType->slug=Str::slug($form_data['title']);
+        $newType->title = $form_data['title'];
+        $newType->slug = Str::slug($form_data['title']);
         $newType->save();
 
         return redirect()->route('admin.types.index');
@@ -53,9 +54,9 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)//finita
+    public function show($id) //finita
     {
-        $type= Type::findOrFail($id);
+        $type = Type::findOrFail($id);
         return view('admin.types.show', compact('type'));
     }
 
@@ -67,7 +68,8 @@ class TypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $type = Type::findOrFail($id);
+        return view('admin.types.edit', compact('type'));
     }
 
     /**
@@ -79,7 +81,12 @@ class TypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $type = Type::findOrFail($id);
+        $form_taken = $request->all();
+        $type->update($form_taken);
+
+        return redirect()->route('admin.types.show',['type'=> $type->id ]);
+
     }
 
     /**
@@ -88,7 +95,7 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)//finita
+    public function destroy($id) //finita
     {
         $type = Type::findOrFail($id);
         $type->delete();

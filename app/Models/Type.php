@@ -12,4 +12,7 @@ class Type extends Model
     {
         return $this->hasMany(Project::class, 'foreign_key');
     }
-}
+    protected $fillable = [
+        'title'
+    ];
+    }
