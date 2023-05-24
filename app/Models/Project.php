@@ -10,11 +10,13 @@ class Project extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'description'
+        'description',
+        'slug',
+        'type_id'
 
     ];
     public function type()
     {
-        return $this->belongTo(Type::class, 'foreign_key');
+        return $this->belongsTo(Type::class, 'foreign_key');
     }
 }

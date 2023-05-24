@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
+use Illuminate\Support\Str;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -15,8 +16,9 @@ class ProjectController extends Controller
      */
     public function index() //finita
     {
+        $types = Type::all();
         $project = Project::all();
-        return view('admin.projects.index', compact('project'));
+        return view('admin.projects.index', compact('project','types'));
     }
 
     /**
@@ -26,8 +28,8 @@ class ProjectController extends Controller
      */
     public function create() //finita
     {
-    
-        return view('admin.projects.create');
+        $types = Type::all();
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -50,6 +52,8 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->title = $form_data['title'];
         $newProject->description = $form_data['description'];
+        $newProject->slug=Str::slug($form_data['title']);
+        $newProject->type_id=$form_data['type_id'] ;    
         $newProject->save();
 
         return redirect()->route('admin.projects.show',['project'=> $newProject->id]);
@@ -63,8 +67,9 @@ class ProjectController extends Controller
      */
     public function show($id) //finita
     {
+       $types=Type::all();
         $project = Project::findOrFail($id);
-        return view('admin.projects.show', compact('project'));
+        return view('admin.projects.show', compact('project', 'types'));
     }
 
     /**

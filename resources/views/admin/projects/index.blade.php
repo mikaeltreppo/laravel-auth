@@ -8,7 +8,9 @@
       <tr>
         <th scope="col">Titolo</th>
         <th scope="col">Descrizione</th>
+        <th scope="col">Tipologia</th>
         <th scope="col">Azioni</th>
+       
 
     
       </tr>
@@ -19,9 +21,11 @@
       <tr>
         <th scope="row">{{$proj->title}}</th>
         <td>{{$proj->description}}</td>
+        <td>{{$proj->type_id}}</td>
         <td> 
           <a href="{{route('admin.projects.show', ['project' => $proj->id])}}" class="btn btn-primary m-2">Apri</a> 
           <a href="{{route('admin.projects.edit', ['project' => $proj->id])}}" class="btn btn-warning m-2">Modifica</a> 
+
           <form method="POST" action="{{route('admin.projects.destroy', ['project'=> $proj->id])}}">
             @method('DELETE')
             @csrf
