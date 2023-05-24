@@ -11,6 +11,10 @@ class Project extends Model
     protected $fillable = [
         'title',
         'description'
-       
+
     ];
+    public function type()
+    {
+        return $this->belongTo(Type::class, 'foreign_key');
+    }
 }
