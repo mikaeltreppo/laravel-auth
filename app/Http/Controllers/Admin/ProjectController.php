@@ -26,6 +26,7 @@ class ProjectController extends Controller
      */
     public function create() //finita
     {
+    
         return view('admin.projects.create');
     }
 
@@ -36,7 +37,14 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) //finito
-    {
+    {    
+        $request->validate([
+        'title' => 'required|max:255',
+        'description' => 'required'
+    ]);
+
+
+
         $form_data = $request->all();
 
         $newProject = new Project();
@@ -44,7 +52,7 @@ class ProjectController extends Controller
         $newProject->description = $form_data['description'];
         $newProject->save();
 
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.show',['project'=> $newProject->id]);
     }
 
     /**
@@ -80,6 +88,12 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)//finito
     {
+
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required'
+        ]);
+
         $project = Project::findOrFail($id);
         $form_data = $request->all();
         $project->update($form_data);

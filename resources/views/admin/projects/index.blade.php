@@ -22,8 +22,11 @@
         <td> 
           <a href="{{route('admin.projects.show', ['project' => $proj->id])}}" class="btn btn-primary m-2">Apri</a> 
           <a href="{{route('admin.projects.edit', ['project' => $proj->id])}}" class="btn btn-warning m-2">Modifica</a> 
-          <button type="submit" class="btn btn-danger">Cancella</button>
-              
+          <form method="POST" action="{{route('admin.projects.destroy', ['project'=> $proj->id])}}">
+            @method('DELETE')
+            @csrf
+          <button type="submit" class="btn btn-danger m-2">Cancella</button>
+        </form>
               
                    
         </td>
