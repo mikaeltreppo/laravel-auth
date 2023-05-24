@@ -8,7 +8,7 @@
         <div class="card-body">
           <h5 class="card-title">{{$project->title}}</h5>
           <p class="card-text">{{$project->description}}</p>
-          <p class="card-text"></p>
+        <!--  <p class="card-text">7\\$project->type->title}}</p>-->
           <a href="{{route('admin.projects.index')}}" class="btn btn-primary">Torna ai Progetti</a>
         </div>
       </div>

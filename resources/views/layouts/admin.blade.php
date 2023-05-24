@@ -61,6 +61,22 @@
                               Crea Nuovo Progetto
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.types.index') }}" class="nav-link text-white">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#speedometer2"></use>
+                                </svg>
+                              Tipologie
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.types.create') }}" class="nav-link text-white">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#speedometer2"></use>
+                                </svg>
+                              Crea Nuova Tipologia
+                            </a>
+                        </li>
                     </ul>
                     <hr>
                 </div>

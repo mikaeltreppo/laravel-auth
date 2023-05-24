@@ -67,7 +67,7 @@ class ProjectController extends Controller
      */
     public function show($id) //finita
     {
-       $types=Type::all();
+        $types=Type::all();
         $project = Project::findOrFail($id);
         return view('admin.projects.show', compact('project', 'types'));
     }

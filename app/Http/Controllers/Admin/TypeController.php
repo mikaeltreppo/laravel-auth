@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
@@ -12,9 +13,10 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index()//finita
     {
-        //
+        $types = Type::all();
+        return view('admin.types.index', compact('types'));
     }
 
     /**
@@ -22,9 +24,9 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create()//finita
     {
-        //
+        return view('admin.types.create');
     }
 
     /**
@@ -33,9 +35,16 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request)//finita
     {
-        //
+        $form_data = $request->all();
+
+        $newType = new Type();
+        $newType->title=$form_data['title'];
+        $newType->slug=Str::slug($form_data['title']);
+        $newType->save();
+
+        return redirect()->route('admin.types.index');
     }
 
     /**
@@ -44,9 +53,10 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id)//finita
     {
-        //
+        $type= Type::findOrFail($id);
+        return view('admin.types.show', compact('type'));
     }
 
     /**
@@ -78,8 +88,10 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id)//finita
     {
-        //
+        $type = Type::findOrFail($id);
+        $type->delete();
+        return redirect()->route('admin.types.index');
     }
 }
